@@ -1,0 +1,34 @@
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import Navbar from '@/components/Navbar'
+
+import { AuthProvider } from '@/lib/AuthContext'
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'Graide - Academic Analytics',
+  description: 'Insights into student performance and trends',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body className={`${inter.className} bg-slate-50 text-slate-900`}>
+        <div className="min-h-screen bg-slate-50">
+          <AuthProvider>
+            <Navbar />
+            <main className="container mx-auto px-4 py-8">
+              {children}
+            </main>
+          </AuthProvider>
+        </div>
+      </body>
+    </html>
+  )
+}
